@@ -13,7 +13,7 @@
     <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================================================
@@ -174,6 +174,11 @@
             opacity: 0;
             backdrop-filter: blur(20px);
             box-shadow: 0 10px 40px rgba(45, 27, 78, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+            text-align: left;
+            width: 100%;
         }
 
         .card::before {
@@ -272,7 +277,7 @@
         }
 
         .value-prop-text {
-            font-family: var(--font-primary);
+            font-family: 'Dancing Script', cursive;
             color: var(--color-text-secondary);
             max-width: 520px;
             margin-left: auto;
@@ -280,9 +285,8 @@
             margin-bottom: calc(var(--spacing-unit) * 3);
             text-align: center;
             line-height: 1.7;
-            font-size: 1.25rem;
-            font-weight: 400;
-            font-style: italic;
+            font-size: 1.4rem;
+            font-weight: 500;
             letter-spacing: 0.01em;
         }
         
@@ -542,6 +546,222 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* ==========================================================================
+           MODAL STYLES - ULTRA UI/UX
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 11, 46, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, rgba(45, 27, 78, 0.95), rgba(139, 95, 191, 0.1));
+            border: 1px solid rgba(139, 95, 191, 0.3);
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 4);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(139, 95, 191, 0.3);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--color-text-primary);
+            transform: scale(1.1);
+        }
+
+        .modal-title {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(139, 95, 191, 0.3);
+        }
+
+        .modal-subtitle {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .modal-options {
+            display: grid;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .modal-option {
+            background: linear-gradient(135deg, rgba(139, 95, 191, 0.1), rgba(45, 27, 78, 0.2));
+            border: 2px solid rgba(139, 95, 191, 0.3);
+            border-radius: 15px;
+            padding: calc(var(--spacing-unit) * 2.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .modal-option:hover::before {
+            left: 100%;
+        }
+
+        .modal-option:hover {
+            border-color: var(--color-accent);
+            background: linear-gradient(135deg, rgba(139, 95, 191, 0.2), rgba(45, 27, 78, 0.3));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 95, 191, 0.3);
+        }
+
+        .modal-option-title {
+            font-family: var(--font-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .modal-option-desc {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .modal-textarea {
+            width: 100%;
+            min-height: 120px;
+            background: rgba(45, 27, 78, 0.3);
+            border: 2px solid rgba(139, 95, 191, 0.3);
+            border-radius: 12px;
+            padding: calc(var(--spacing-unit) * 2);
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .modal-textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 20px rgba(139, 95, 191, 0.3);
+        }
+
+        .modal-textarea::placeholder {
+            color: var(--color-text-secondary);
+            opacity: 0.7;
+        }
+
+        .modal-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #FFFFFF, #F0F0F0);
+            color: var(--color-background);
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mobile modal adjustments */
+        @media (max-width: 768px) {
+            .modal {
+                padding: calc(var(--spacing-unit) * 3);
+                margin: calc(var(--spacing-unit) * 2);
+                max-height: 85vh;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-subtitle {
+                font-size: 1rem;
+            }
+
+            .modal-option {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+
+            .modal-option-title {
+                font-size: 1.1rem;
+            }
+
+            .modal-option-desc {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -568,18 +788,18 @@
                 </a>
 
                 <!-- Button 2: Real Estate -->
-                <a href="https://wa.me/5551993288772?text=Olá,%20vim%20através%20do%20link%20da%20bio%20da%20Carol." target="_blank" rel="noopener noreferrer" class="card card--realestate">
+                <button onclick="openRealEstateModal()" class="card card--realestate">
                     <h2 class="card-title">Negócios Imobiliários</h2>
                     <p class="card-description">Interessado em fazer negócios imobiliários? Entre em contato comigo agora mesmo.</p>
                     <span class="card-cta">Contatar Agora &rarr;</span>
-                </a>
+                </button>
 
                 <!-- Button 3: Travel & Wellness -->
-                <a href="https://wa.me/5551993288772?text=Olá,%20vim%20através%20do%20link%20da%20bio%20da%20Carol." target="_blank" rel="noopener noreferrer" class="card card--travel">
+                <button onclick="openTravelModal()" class="card card--travel">
                     <h2 class="card-title">Consultoria de Viagens e Bem Estar</h2>
                     <p class="card-description">Planeje suas viagens dos sonhos e cuide do seu bem estar com consultoria especializada.</p>
                     <span class="card-cta">Saiba Mais &rarr;</span>
-                </a>
+                </button>
 
             </section>
 
@@ -592,7 +812,7 @@
         <!-- ======================= FOOTER ======================= -->
         <footer class="site-footer">
             <div class="social-links">
-                <a href="https://wa.me/5551993288772?text=Olá,%20vim%20através%20do%20link%20da%20bio%20da%20Carol." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <a href="https://wa.me/212777521023?text=Olá,%20vim%20através%20do%20link%20da%20bio%20da%20Carol." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.51 3.488"/></svg>
                 </a>
                 <a href="https://www.instagram.com/carolldeabreu" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
@@ -606,6 +826,105 @@
         </footer>
 
     </div>
+
+    <!-- Modal Negócios Imobiliários -->
+    <div id="realEstateModal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('realEstateModal')">&times;</button>
+            <h2 class="modal-title">Negócios Imobiliários</h2>
+            <p class="modal-subtitle">Onde você gostaria de investir ou encontrar oportunidades imobiliárias?</p>
+
+            <div class="modal-options">
+                <div class="modal-option" onclick="selectRealEstateOption('brasil')">
+                    <div class="modal-option-title">🇧🇷 Brasil</div>
+                    <div class="modal-option-desc">Oportunidades de investimento e negócios imobiliários no mercado brasileiro</div>
+                </div>
+
+                <div class="modal-option" onclick="selectRealEstateOption('exterior')">
+                    <div class="modal-option-title">🌍 Exterior</div>
+                    <div class="modal-option-desc">Investimentos internacionais e oportunidades imobiliárias no exterior</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Viagens e Bem Estar -->
+    <div id="travelModal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('travelModal')">&times;</button>
+            <h2 class="modal-title">Viagens e Bem Estar</h2>
+            <p class="modal-subtitle">O que você tem interesse em aprender sobre viagens ou sobre bem estar?</p>
+
+            <textarea class="modal-textarea" id="travelInterest" placeholder="Conte-me sobre seus interesses... Por exemplo: destinos específicos, dicas de viagem, roteiros, bem estar físico, mental, práticas de autocuidado, etc."></textarea>
+
+            <button class="modal-submit" onclick="submitTravelForm()">Enviar Mensagem</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para abrir modal de negócios imobiliários
+        function openRealEstateModal() {
+            document.getElementById('realEstateModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Função para abrir modal de viagens
+        function openTravelModal() {
+            document.getElementById('travelModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Função para fechar modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Função para selecionar opção de negócios imobiliários
+        function selectRealEstateOption(option) {
+            let message = '';
+            if (option === 'brasil') {
+                message = 'Oi Carol, gostaria de saber mais sobre as oportunidades imobiliárias no Brasil';
+            } else {
+                message = 'Oi Carol, gostaria de saber mais sobre as oportunidades imobiliárias no exterior';
+            }
+
+            const whatsappUrl = `https://wa.me/212777521023?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            closeModal('realEstateModal');
+        }
+
+        // Função para enviar formulário de viagens
+        function submitTravelForm() {
+            const interest = document.getElementById('travelInterest').value.trim();
+            let message = 'Oi Carol, gostaria de saber mais sobre dicas de viagens e bem estar!';
+
+            if (interest) {
+                message += ` Especificamente: ${interest}`;
+            }
+
+            const whatsappUrl = `https://wa.me/212777521023?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            closeModal('travelModal');
+        }
+
+        // Fechar modal clicando fora dele
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal(e.target.id);
+            }
+        });
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal-overlay.active');
+                if (activeModal) {
+                    closeModal(activeModal.id);
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
